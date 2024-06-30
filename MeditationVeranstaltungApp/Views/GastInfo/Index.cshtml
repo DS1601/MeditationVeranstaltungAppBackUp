@@ -1,0 +1,49 @@
+﻿@using MeditationVeranstaltungApp.Data
+@{
+    ViewData["Title"] = "Gast Info";
+}
+
+<div class="text-center">
+    <div class="d-flex justify-content-between">
+        <h3>Meine Buchungen</h3>
+        <button type="button" class="btn btn-primary" onclick="document.URL='booking.html'">Neue Buchung</button>
+        
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Anzahl</th>
+          <th>Ankunft Info</th>
+          <th>Abfahrt Info</th>
+          <th>Kontakt</th>
+          <th>Fahrer</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+
+            @{
+                foreach(GastInfo gast in ViewBag.GastInfos)
+                {
+                    <tr>
+                        <td>@gast.AnzahlMaenner  </td>
+                        <td>@gast.AnkunftAm (Airport-HH)</td>
+                        <td>12.08.2024-15:15 (Airport-HH)</td>
+                        <td>Kulbir Singh(Köln-DE)</td>
+                        <td>Jaspal Singh(HH-DE)</td>
+                        <td>
+                            <div class="d-flex" style="gap: 4px;">
+                                <a href="booking-detail.html"><button type="button" class="btn btn-info">View</button></a>
+                                <button type="button" class="btn btn-primary">Edit</button>
+                                <button type="button" class="btn btn-danger">Absagen</button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+
+      </tbody>
+    </table>
+    @ViewBag.GastInfos.Count
+</div>
