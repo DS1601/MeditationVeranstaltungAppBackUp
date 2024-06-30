@@ -56,9 +56,21 @@ namespace MeditationVeranstaltungApp.Data
                     Telefon = "+44 123 5678 9911",
                     Stadt = "Slough",
                     Land = "UK"
-                }
+                }, new Kontakt
+                 {
+                     Id = 2,
+                     Vorname = "Jaspal",
+                     Nachname = "Singh",
+                     Anrede = Anrede.Herr,
+                     Geschlecht = Geschlecht.Männlich,
+                     Email = "jaspal.singht@meditationcamp.com",
+                     Telefon = "+49 754 5678 5789",
+                     Stadt = "Hamburg",
+                     Land = "DE"
+                 }
                 );
 
+           
             modelBuilder.Entity<GastInfo>().HasData(
                new GastInfo
                {
@@ -68,6 +80,7 @@ namespace MeditationVeranstaltungApp.Data
                    AbfahrtAm = DateTime.Parse("2024-08-14T16:20:55.630Z"),
                    AbfahrtOrt = "Flughagen",
                    KontaktId=1,
+                   FahrerKontaktId=2,
                    Veranstalltung ="SAS2024HH",
                    UserId= "93df0a45-7232-45e6-b882-8dcc0966ba8a"
                }

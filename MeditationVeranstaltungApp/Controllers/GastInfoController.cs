@@ -15,7 +15,7 @@ namespace MeditationVeranstaltungApp.Controllers
         }
         public IActionResult Index()
         {
-            var gastInfos = context.GastInfos.Include(q => q.Kontakt).ToList();
+            var gastInfos = context.GastInfos.Include(q => q.Kontakt).Include(q => q.FahrerKontakt).ToList();
             ViewBag.GastInfos = gastInfos;
             return View();
         }
