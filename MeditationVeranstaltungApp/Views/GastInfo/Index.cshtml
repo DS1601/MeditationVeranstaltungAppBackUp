@@ -6,7 +6,9 @@
 <div class="text-center">
     <div class="d-flex justify-content-between">
         <h3>Meine Buchungen</h3>
-        <button type="button" class="btn btn-primary" onclick="document.URL='booking.html'">Neue Buchung</button>
+        <form asp-action="CreateEditGastInfo">
+            <button type="submit" class="btn btn-primary">Neue Buchung</button>
+        </form>
         
     </div>
 
@@ -26,12 +28,21 @@
             @{
                 foreach(GastInfo gast in ViewBag.GastInfos)
                 {
+                    var anzahl = gast.AnzahlMaenner + gast.AnzahlWeiblich;
                     <tr>
-                        <td>@gast.AnzahlMaenner  </td>
+                        <td>@anzahl </td>
                         <td>@gast.AnkunftAm (@gast.AnkunftOrt)</td>
                         <td>@gast.AbfahrtAm (@gast.AbfahrtOrt)</td>
                         <td>@gast.Kontakt.Vorname @gast.Kontakt.Nachname (@gast.Kontakt.Stadt-@gast.Kontakt.Land)</td>
-                        <td>@gast.FahrerKontakt.Vorname @gast.FahrerKontakt.Nachname (@gast.FahrerKontakt.Stadt-@gast.FahrerKontakt.Land)</td>
+                        @if(gast.FahrerKontakt != null)
+                        {
+                            <td>@gast.FahrerKontakt.Vorname @gast.FahrerKontakt?.Nachname (@gast.FahrerKontakt?.Stadt-@gast.FahrerKontakt?.Land)</td>
+
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
 
                         <td>
                             <div class="d-flex" style="gap: 4px;">
@@ -46,5 +57,4 @@
 
       </tbody>
     </table>
-    @ViewBag.GastInfos.Count
 </div>
