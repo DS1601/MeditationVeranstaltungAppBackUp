@@ -46,11 +46,30 @@
 
                         <td>
                             <div class="d-flex" style="gap: 4px;">
-                                <button type="button" class="btn btn-primary">Anzeigen</button>
-                                <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
-                                    <button type="submit" class="btn btn-info">Bearbeiten</button>
-                                </form>
-                                <button type="button" class="btn btn-danger">Absagen</button>
+                                <button type="button" class="btn btn-info">Anzeigen @User.IsInRole("User")</button>
+
+                                @{
+                                    User.IsInRole("User");
+                                    if (User.IsInRole("User"))
+                                    {
+                                        <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
+                                            <button type="submit" class="btn btn-info">Bearbeiten</button>
+                                        </form>
+                                        <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
+                                            <button type="button" class="btn btn-primary">Absagen</button>
+                                        </form>
+                                    }
+                                }
+
+                                @{
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
+                                            <button type="button" class="btn btn-primary">Fahrer Zuweisen</button>
+                                        </form>
+                                    }
+                                }
+
                             </div>
                         </td>
                     </tr>

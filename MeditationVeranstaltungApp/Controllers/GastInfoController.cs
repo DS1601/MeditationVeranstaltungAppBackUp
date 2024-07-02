@@ -1,24 +1,41 @@
 ﻿using MeditationVeranstaltungApp.Data;
 using MeditationVeranstaltungApp.Data.Migrations;
 using MeditationVeranstaltungApp.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace MeditationVeranstaltungApp.Controllers
 {
+    [Authorize]
     public class GastInfoController : Controller
     {
         private readonly ApplicationDbContext context;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public GastInfoController(ApplicationDbContext context)
+        public GastInfoController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
         public IActionResult Index()
         {
-            var gastInfos = context.GastInfos.Include(q => q.Kontakt).Include(q => q.FahrerKontakt).ToList();
-            ViewBag.GastInfos = gastInfos;
+            var query = context.GastInfos.Include(g => g.Kontakt).Include(g => g.FahrerKontakt);
+            if (User.IsInRole("Admin"))
+            {
+                var userId = userManager.GetUserId(HttpContext.User);
+                var gastInfos = query.ToList();
+                ViewBag.GastInfos = gastInfos;
+            }
+            else
+            {
+                var userId = userManager.GetUserId(HttpContext.User);
+                var gastInfos = query.Where(g => g.UserId == userId).ToList();
+                ViewBag.GastInfos = gastInfos;
+            }
+
             return View();
         }
 
@@ -79,7 +96,7 @@ namespace MeditationVeranstaltungApp.Controllers
                     AbfahrtAm = gastInfoModel.AbfahrtAm.ToDateTime(gastInfoModel.AbfahrtUm),
                     AbfahrtOrt = gastInfoModel.AbfahrtOrt,
                     Notiz = gastInfoModel.Notiz,
-                    UserId = "93df0a45-7232-45e6-b882-8dcc0966ba8a"
+                    UserId = userManager.GetUserId(HttpContext.User)
                 };
 
                 var kontakt = context.Kontakts
@@ -94,7 +111,7 @@ namespace MeditationVeranstaltungApp.Controllers
                 if (kontakt != null)
                 {
                     gastInfo.KontaktId = kontakt.Id;
-                    gastInfo.Kontakt= kontakt;
+                    gastInfo.Kontakt = kontakt;
                 }
                 else
                 {

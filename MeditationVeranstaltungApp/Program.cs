@@ -1,6 +1,7 @@
 using MeditationVeranstaltungApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MeditationVeranstaltungApp
 {
@@ -17,6 +18,7 @@ namespace MeditationVeranstaltungApp
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
@@ -46,7 +48,49 @@ namespace MeditationVeranstaltungApp
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
 
+            var servicerProvider = app.Services.GetService<IServiceProvider>();
+
+
+            using (var serviceScope = app.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+
+                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                CreateRole(roleManager).Wait();
+                var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+                CreateDefaultUser(userManager).Wait();
+            }
+
             app.Run();
+        }
+        public static async Task CreateRole(RoleManager<IdentityRole> roleManager)
+        {
+            var adminRoleExists = await roleManager.RoleExistsAsync("Admin");
+            if (adminRoleExists == false)
+            {
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            var userRoleExists = await roleManager.RoleExistsAsync("User");
+            if (userRoleExists == false)
+            {
+                await roleManager.CreateAsync(new IdentityRole("User"));
+            }
+        }
+        public static async Task CreateDefaultUser(UserManager<IdentityUser> userManager)
+        {
+            var adminUser = await userManager.FindByEmailAsync("admin@web.de");
+            if (adminUser == null)
+            {
+                var user = new IdentityUser
+                {
+                    Email = "admin@web.de",
+                    UserName = "admin@web.de"
+
+                };
+                await userManager.CreateAsync(user, "Waheguru@1");
+                 adminUser = await userManager.FindByEmailAsync("admin@web.de");
+            }
+            await userManager.AddToRoleAsync(adminUser, "Admin");
         }
     }
 }
