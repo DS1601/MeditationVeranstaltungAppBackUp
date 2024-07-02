@@ -9,24 +9,24 @@
         <form asp-action="CreateEditGastInfo">
             <button type="submit" class="btn btn-primary">Neue Buchung</button>
         </form>
-        
+
     </div>
 
     <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Anzahl</th>
-          <th>Ankunft Info</th>
-          <th>Abfahrt Info</th>
-          <th>Kontakt</th>
-          <th>Fahrer</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
+        <thead>
+            <tr>
+                <th>Anzahl</th>
+                <th>Ankunft Info</th>
+                <th>Abfahrt Info</th>
+                <th>Kontakt</th>
+                <th>Fahrer</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
 
             @{
-                foreach(GastInfo gast in ViewBag.GastInfos)
+                foreach (GastInfo gast in ViewBag.GastInfos)
                 {
                     var anzahl = gast.AnzahlMaenner + gast.AnzahlWeiblich;
                     <tr>
@@ -34,7 +34,7 @@
                         <td>@gast.AnkunftAm (@gast.AnkunftOrt)</td>
                         <td>@gast.AbfahrtAm (@gast.AbfahrtOrt)</td>
                         <td>@gast.Kontakt.Vorname @gast.Kontakt.Nachname (@gast.Kontakt.Stadt-@gast.Kontakt.Land)</td>
-                        @if(gast.FahrerKontakt != null)
+                        @if (gast.FahrerKontakt != null)
                         {
                             <td>@gast.FahrerKontakt.Vorname @gast.FahrerKontakt?.Nachname (@gast.FahrerKontakt?.Stadt-@gast.FahrerKontakt?.Land)</td>
 
@@ -46,8 +46,10 @@
 
                         <td>
                             <div class="d-flex" style="gap: 4px;">
-                                <a href="booking-detail.html"><button type="button" class="btn btn-info">View</button></a>
-                                <button type="button" class="btn btn-primary">Edit</button>
+                                <button type="button" class="btn btn-primary">Anzeigen</button>
+                                <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
+                                    <button type="submit" class="btn btn-info">Bearbeiten</button>
+                                </form>
                                 <button type="button" class="btn btn-danger">Absagen</button>
                             </div>
                         </td>
@@ -55,6 +57,6 @@
                 }
             }
 
-      </tbody>
+        </tbody>
     </table>
 </div>

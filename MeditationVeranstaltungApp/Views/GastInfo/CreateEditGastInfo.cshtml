@@ -2,13 +2,13 @@
 
 @{
     List<string> orte = new List<string> { "Airport-HH", "Altona-HH", "HBF-HH", "Dammtor-HH", "ZOB-HH" };
-  }                                              
+}
 <form asp-action="CreateEditGastInfoSubmit" method="post" class="d-flex flex-column p-3 gap-3">
     <div class="d-flex p-3 flex-column" style="position: relative;border: 1px dotted black; border-radius: 5px;">
         <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Gast Info&nbsp;&nbsp;</h5>
 
         <div class="d-flex flex-fill mt-1" style="gap:20px;">
-
+            <input hidden type="number" min="0" class="form-control" asp-for="AnzahlMaenner" id="Id" name="Id">
             <div class="flex-fill">
                 <label for="AnzahlMaenner" class="form-label">Anzahl Männer:</label>
                 <input type="number" min="0" class="form-control" asp-for="AnzahlMaenner" id="AnzahlMaenner" name="AnzahlMaenner">
@@ -29,7 +29,7 @@
 
             <div class="flex-fill">
                 <label for="AnkunftUm" class="form-label">AnkunftUm:</label>
-                <input type="time" class="form-control" id="AnkunftUm" name="AnkunftUm">
+                <input type="time" class="form-control" asp-for="AnkunftUm" id="AnkunftUm" name="AnkunftUm">
             </div>
             <div class="flex-fill">
                 <label for="AnkunftOrt" class="form-label">AnkunftOrt:</label>
@@ -88,9 +88,9 @@
             <div class="flex-fill">
                 <label for="Anrede" class="form-label">Anrede:</label>
                 <select class="form-select" asp-for="Anrede" id="Anrede" name="Anrede">
-                    <option>--</option>
                     <option>Herr</option>
                     <option>Frau</option>
+                    <option>--</option>
                 </select>
             </div>
             <div class="flex-fill">
