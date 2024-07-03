@@ -1,6 +1,10 @@
 ﻿@model GastInfoModel
 
 @{
+    ViewData["Title"] = "Gast Info";
+}
+
+@{
     List<string> orte = new List<string> { "Airport-HH", "Altona-HH", "HBF-HH", "Dammtor-HH", "ZOB-HH" };
 }
 <form asp-action="CreateEditGastInfoSubmit" method="post" class="d-flex flex-column p-3 gap-3">
@@ -8,7 +12,7 @@
         <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Gast Info&nbsp;&nbsp;</h5>
 
         <div class="d-flex flex-fill mt-1" style="gap:20px;">
-            <input hidden type="number" min="0" class="form-control" asp-for="AnzahlMaenner" id="Id" name="Id">
+            <input hidden type="number" min="0" class="form-control" asp-for="Id" id="Id" name="Id">
             <div class="flex-fill">
                 <label for="AnzahlMaenner" class="form-label">Anzahl Männer:</label>
                 <input type="number" min="0" class="form-control" asp-for="AnzahlMaenner" id="AnzahlMaenner" name="AnzahlMaenner">

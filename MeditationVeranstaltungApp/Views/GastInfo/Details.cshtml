@@ -1,0 +1,190 @@
+﻿@using MeditationVeranstaltungApp.Data
+@{
+    ViewData["Title"] = "Gast Info";
+    var gastInfo = ViewBag.GastInfo;
+}
+
+
+<div class="text-center">
+    <div class="p-4 text-center d-flex flex-column" style="gap:20px;min-height: 100vh;">
+
+        <h3>Meine Buchung</h3>
+
+        <!-- item start -->
+
+
+
+        <div class="d-flex p-3 justify-content-between" style="position: relative;border: 1px dotted black; border-radius: 5px;">
+            <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Travel Info&nbsp;&nbsp;</h5>
+
+            <div>
+                <div class="d-flex flex-column">
+                    <span><strong>Anzahl Männer</strong></span>
+                    <span>@gastInfo.AnzahlMaenner<span>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex flex-column">
+                    <span><strong>Anzahl Frauen</strong></span>
+                    <span>@gastInfo.AnzahlWeiblich<span>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex flex-column">
+                    <span><strong>AnkunftAm</strong></span>
+                    <span>@gastInfo.AnkunftAm</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex flex-column">
+                    <span><strong>Ankuftsort</strong></span>
+                    <span>@gastInfo.AnkunftOrt</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex flex-column">
+                    <span><strong>AbfahrtAm</strong></span>
+                    <span>@gastInfo.AbfahrtAm</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex flex-column">
+                    <span><strong>Abfahrtsort</strong></span>
+                    <span>AnkunftOrt</span>
+                </div>
+            </div>
+
+
+        </div>
+
+        @{
+            if (gastInfo.Kontakt != null)
+            {
+                <div class="d-flex p-3 justify-content-between" style="position: relative;border: 1px dotted black; border-radius: 5px;">
+                    <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Contact Info&nbsp;&nbsp;</h5>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>Name</strong></span>
+                            <span>@gastInfo.Kontakt.Anrede @gastInfo.Kontakt.Vorname @gastInfo.Kontakt.Nachname</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>E-Mail</strong></span>
+                            <span>@gastInfo.Kontakt.Email</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>Telefon</strong></span>
+                            <span>@gastInfo.Kontakt.Telefon</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>Stadt</strong></span>
+                            <span>@gastInfo.Kontakt.Stadt (@gastInfo.Kontakt.Land)</span>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+            if (gastInfo.FahrerKontakt != null)
+            {
+                <div class="d-flex p-3 justify-content-between" style="position: relative;border: 1px dotted black; border-radius: 5px;">
+                    <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Contact Info&nbsp;&nbsp;</h5>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>Name</strong></span>
+                            <span>@gastInfo.FahrerKontakt.Anrede @gastInfo.FahrerKontakt.Vorname @gastInfo.FahrerKontakt.Nachname</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>E-Mail</strong></span>
+                            <span>@gastInfo.FahrerKontakt.Email</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>Telefon</strong></span>
+                            <span>@gastInfo.FahrerKontakt.Telefon</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex flex-column">
+                            <span><strong>Stadt</strong></span>
+                            <span>@gastInfo.FahrerKontakt.Stadt (@gastInfo.FahrerKontakt.Land)</span>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+
+
+        <!-- item end -->
+
+        <div class="d-flex p-2 justify-content-between">
+            <button type="button" class="btn btn-primary">Zurück</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="absageBestaetigungModal" tabindex="-1" aria-labelledby="absageBestaetigungModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <form asp-action="Absage" class="d-flex flex-column p-3 gap-3">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="absageBestaetigungModalLabel">Absage</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Schade, dass Sie nicht mitmachen wollen!</h5>
+                                @model AbsageModel
+
+                                <div class="d-flex flex-fill mt-1" style="gap:20px;">
+                                    <input hidden type="number" min="0" class="form-control" asp-for="Id" value="@gastInfo.Id" id="Id" name="Id">
+                                    <div class="flex-fill">
+                                        <label for="Notiz" class="form-label">Teilen Sie bitte den Grund mit!</label>
+                                        <textarea asp-for="Notiz" rows="4" class="form-control" id="Notiz" name="Notiz"> </textarea>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                <button type="submit" class="btn btn-danger">Absagen</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="CreateEditGastInfo" asp-route-id="@gastInfo.Id">
+                <button type="submit" class="btn btn-warning">Editieren</button>
+            </form>
+        </div>
+
+
+
+
+    </div>
+
+</div>

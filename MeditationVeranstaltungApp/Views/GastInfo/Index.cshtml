@@ -29,7 +29,7 @@
                 foreach (GastInfo gast in ViewBag.GastInfos)
                 {
                     var anzahl = gast.AnzahlMaenner + gast.AnzahlWeiblich;
-                    <tr>
+                    <tr class="@((anzahl>3 ? "table-danger" : ""))">
                         <td>@anzahl </td>
                         <td>@gast.AnkunftAm (@gast.AnkunftOrt)</td>
                         <td>@gast.AbfahrtAm (@gast.AbfahrtOrt)</td>
@@ -46,7 +46,10 @@
 
                         <td>
                             <div class="d-flex" style="gap: 4px;">
-                                <button type="button" class="btn btn-info">Anzeigen</button>
+                                <form asp-action="Details" asp-route-id="@gast.Id">
+                                    <button type="submit" class="btn btn-info">Anzeigen</button>
+                                </form>
+
 
                                 @{
                                     User.IsInRole("User");
@@ -55,9 +58,42 @@
                                         <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
                                             <button type="submit" class="btn btn-warning">Bearbeiten</button>
                                         </form>
-                                        <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
-                                            <button type="button" class="btn btn-danger">Absagen</button>
-                                        </form>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="absageBestaetigungModal" tabindex="-1" aria-labelledby="absageBestaetigungModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                
+                                                <div class="modal-content">
+                                                    <form asp-action="Absage" class="d-flex flex-column p-3 gap-3">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="absageBestaetigungModalLabel">Absage</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h5>Schade, dass Sie nicht mitmachen wollen!</h5>
+                                                    @model AbsageModel
+
+                                                            <div class="d-flex flex-fill mt-1" style="gap:20px;">
+                                                                <input hidden type="number" min="0" class="form-control" asp-for="Id" value="@gast.Id" id="Id" name="Id">
+                                                                <div class="flex-fill">
+                                                                    <label for="Notiz" class="form-label">Teilen Sie bitte den Grund mit!</label>
+                                                                    <textarea asp-for="Notiz" rows="4" class="form-control" id="Notiz" name="Notiz"> </textarea>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                                            <button type="submit" class="btn btn-danger">Absagen</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     }
                                 }
 
@@ -78,4 +114,7 @@
 
         </tbody>
     </table>
+
+
+
 </div>

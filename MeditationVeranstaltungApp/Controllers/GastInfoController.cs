@@ -148,5 +148,26 @@ namespace MeditationVeranstaltungApp.Controllers
 
 
         }
+        public IActionResult Absage(AbsageModel absageModel)
+        {
+            return RedirectToAction("Index");
+        }
+        public IActionResult Details(int id)
+        {
+            if (id == 0)
+            {
+                return View();
+            }
+
+            var gastInfoAusDB = context.GastInfos.Include(q => q.Kontakt).Include(g => g.FahrerKontakt).FirstOrDefault(g => g.Id == id);
+
+            if (gastInfoAusDB == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.GastInfo = gastInfoAusDB;
+            return View();
+        }
     }
 }
