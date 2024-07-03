@@ -12,7 +12,7 @@ namespace MeditationVeranstaltungApp.Models
         }
         public int Id { get; set; }
         
-        public string? Notiz {  get; set; }
+        public string? AbsageGrund {  get; set; }
 
     }
 }

@@ -29,7 +29,7 @@
                 foreach (GastInfo gast in ViewBag.GastInfos)
                 {
                     var anzahl = gast.AnzahlMaenner + gast.AnzahlWeiblich;
-                    <tr class="@((anzahl>3 ? "table-danger" : ""))">
+                    <tr class="@((gast.AbgesagtAm!=null ? "table-danger" : ""))">
                         <td>@anzahl </td>
                         <td>@gast.AnkunftAm (@gast.AnkunftOrt)</td>
                         <td>@gast.AbfahrtAm (@gast.AbfahrtOrt)</td>
@@ -58,12 +58,21 @@
                                         <form asp-action="CreateEditGastInfo" asp-route-id="@gast.Id">
                                             <button type="submit" class="btn btn-warning">Bearbeiten</button>
                                         </form>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
+                                        if (gast.AbgesagtAm != null)
+                                        {
+                                            <button type="button" class="btn btn-danger disabled" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
+
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
+
+                                        }
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="absageBestaetigungModal" tabindex="-1" aria-labelledby="absageBestaetigungModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                
+
                                                 <div class="modal-content">
                                                     <form asp-action="Absage" class="d-flex flex-column p-3 gap-3">
                                                         <div class="modal-header">
@@ -77,8 +86,8 @@
                                                             <div class="d-flex flex-fill mt-1" style="gap:20px;">
                                                                 <input hidden type="number" min="0" class="form-control" asp-for="Id" value="@gast.Id" id="Id" name="Id">
                                                                 <div class="flex-fill">
-                                                                    <label for="Notiz" class="form-label">Teilen Sie bitte den Grund mit!</label>
-                                                                    <textarea asp-for="Notiz" rows="4" class="form-control" id="Notiz" name="Notiz"> </textarea>
+                                                                    <label for="AbsageGrund" class="form-label">Teilen Sie bitte den Grund mit!</label>
+                                                                    <textarea asp-for="AbsageGrund" rows="4" class="form-control" id="AbsageGrund" name="AbsageGrund"> </textarea>
                                                                 </div>
 
 

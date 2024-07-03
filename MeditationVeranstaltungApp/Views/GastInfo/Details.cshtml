@@ -141,42 +141,46 @@
 
         <div class="d-flex p-2 justify-content-between">
             <button type="button" class="btn btn-primary">Zurück</button>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
+            @{
+                if (gastInfo.AbgesagtAm == null)
+                {
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="absageBestaetigungModal" tabindex="-1" aria-labelledby="absageBestaetigungModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                    <!-- Modal -->
+                    <div class="modal fade" id="absageBestaetigungModal" tabindex="-1" aria-labelledby="absageBestaetigungModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
 
-                    <div class="modal-content">
-                        <form asp-action="Absage" class="d-flex flex-column p-3 gap-3">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="absageBestaetigungModalLabel">Absage</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h5>Schade, dass Sie nicht mitmachen wollen!</h5>
-                                @model AbsageModel
-
-                                <div class="d-flex flex-fill mt-1" style="gap:20px;">
-                                    <input hidden type="number" min="0" class="form-control" asp-for="Id" value="@gastInfo.Id" id="Id" name="Id">
-                                    <div class="flex-fill">
-                                        <label for="Notiz" class="form-label">Teilen Sie bitte den Grund mit!</label>
-                                        <textarea asp-for="Notiz" rows="4" class="form-control" id="Notiz" name="Notiz"> </textarea>
+                            <div class="modal-content">
+                                <form asp-action="Absage" class="d-flex flex-column p-3 gap-3">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="absageBestaetigungModalLabel">Absage</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
+                                    <div class="modal-body">
+                                        <h5>Schade, dass Sie nicht mitmachen wollen!</h5>
+                                    @model AbsageModel
+
+                                        <div class="d-flex flex-fill mt-1" style="gap:20px;">
+                                            <input hidden type="number" min="0" class="form-control" asp-for="Id" value="@gastInfo.Id" id="Id" name="Id">
+                                            <div class="flex-fill">
+                                                <label for="AbsageGrund" class="form-label">Teilen Sie bitte den Grund mit!</label>
+                                                <textarea asp-for="AbsageGrund" rows="4" class="form-control" id="AbsageGrund" name="AbsageGrund"> </textarea>
+                                            </div>
 
 
-                                </div>
+                                        </div>
 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                        <button type="submit" class="btn btn-danger">Absagen</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-                                <button type="submit" class="btn btn-danger">Absagen</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div>
-
+                }
+            }
             <form asp-action="CreateEditGastInfo" asp-route-id="@gastInfo.Id">
                 <button type="submit" class="btn btn-warning">Editieren</button>
             </form>

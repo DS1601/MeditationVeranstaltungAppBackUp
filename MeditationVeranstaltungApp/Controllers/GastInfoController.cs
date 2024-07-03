@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging.Signing;
 using System;
 
 namespace MeditationVeranstaltungApp.Controllers
@@ -150,6 +151,11 @@ namespace MeditationVeranstaltungApp.Controllers
         }
         public IActionResult Absage(AbsageModel absageModel)
         {
+            var gastInfo = context.GastInfos.FirstOrDefault(g => g.Id == absageModel.Id);
+            gastInfo.AbgesagtAm = DateTime.Now;
+            gastInfo.AbsageGrund = absageModel.AbsageGrund; context.GastInfos.Update(gastInfo);
+            context.Entry(gastInfo).State = EntityState.Modified;
+            context.SaveChanges();
             return RedirectToAction("Index");
         }
         public IActionResult Details(int id)
