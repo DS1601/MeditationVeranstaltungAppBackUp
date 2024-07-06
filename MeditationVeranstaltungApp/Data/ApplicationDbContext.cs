@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeditationVeranstaltungApp.Data
 {
-    public partial class ApplicationDbContext : IdentityDbContext
+    public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Kontakt> Kontakts { get; set; } = null!;
         public virtual DbSet<GastInfo> GastInfos { get; set; } = null!;
@@ -75,6 +75,8 @@ namespace MeditationVeranstaltungApp.Data
                new GastInfo
                {
                    Id = 1,
+                   AnzahlMaenner =2,
+                   AnzahlWeiblich =1,
                    AnkunftAm = DateTime.Parse("2024-08-14T16:20:55.630Z"),
                    AnkunftOrt = "Flughagen",
                    AbfahrtAm = DateTime.Parse("2024-08-14T16:20:55.630Z"),
@@ -86,6 +88,51 @@ namespace MeditationVeranstaltungApp.Data
                }
                );
 
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                 new IdentityRole
+                 {
+                     Name = "User",
+                     NormalizedName = "USER",
+                     Id = "a609455d-5f11-42bd-be9d-5fd66e4570c0"
+                 },
+                 new IdentityRole
+                 {
+                     Name = "Driver",
+                     NormalizedName = "DRIVER",
+                     Id = "b2b71169-bcf7-41c6-90c5-3f808fd7cafa"
+                 },
+                new IdentityRole
+                {
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",
+                    Id = "28aaaaad-012d-4951-b501-5813b2a541ff"
+                }
+            );
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = "ec673be3-bdfe-4ee6-9ff1-3712a38acb5e",
+                    Email = "admin@web.de",
+                    NormalizedEmail = "ADMIN@WEB.DE",
+                    UserName = "admin@web.de",
+                    NormalizedUserName = "ADMIN@WEB.DE",
+                    PasswordHash = hasher.HashPassword(null, "Waheguru@1"),
+                    FirstName="Admin",
+                    LastName=""
+                }
+            );
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "28aaaaad-012d-4951-b501-5813b2a541ff",
+                    UserId = "ec673be3-bdfe-4ee6-9ff1-3712a38acb5e"
+                }
+            );
 
 
             OnModelCreatingPartial(modelBuilder);

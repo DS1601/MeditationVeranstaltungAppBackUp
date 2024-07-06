@@ -11,6 +11,18 @@
             <h2>Neue Konto erstellen.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.FirstName">FirstName</label>
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="FirstName" aria-required="true" placeholder="Diler" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.LastName">LastName</label>
+                <input asp-for="Input.LastName" class="form-control" autocomplete="LastName" aria-required="true" placeholder="Singh" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
             <div class="mb-3">
                 <label asp-for="Input.Email">E-Mail</label>
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />                

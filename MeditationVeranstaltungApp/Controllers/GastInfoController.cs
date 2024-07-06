@@ -14,9 +14,9 @@ namespace MeditationVeranstaltungApp.Controllers
     public class GastInfoController : Controller
     {
         private readonly ApplicationDbContext context;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public GastInfoController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public GastInfoController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
             this.userManager = userManager;

@@ -17,9 +17,10 @@ namespace MeditationVeranstaltungApp
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -48,18 +49,18 @@ namespace MeditationVeranstaltungApp
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
 
-            var servicerProvider = app.Services.GetService<IServiceProvider>();
+            //var servicerProvider = app.Services.GetService<IServiceProvider>();
 
 
-            using (var serviceScope = app.Services.CreateScope())
-            {
-                var services = serviceScope.ServiceProvider;
+            //using (var serviceScope = app.Services.CreateScope())
+            //{
+            //    var services = serviceScope.ServiceProvider;
 
-                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                CreateRole(roleManager).Wait();
-                var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-                CreateDefaultUser(userManager).Wait();
-            }
+            //    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            //    CreateRole(roleManager).Wait();
+            //    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            //    CreateDefaultUser(userManager).Wait();
+            //}
 
             app.Run();
         }

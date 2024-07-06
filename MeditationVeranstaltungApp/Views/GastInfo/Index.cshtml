@@ -6,9 +6,15 @@
 <div class="container pt-3 pb-3">
     <div class="d-flex justify-content-between">
         <h3>Meine Buchungen</h3>
-        <form asp-action="CreateEditGastInfo">
-            <button type="submit" class="btn btn-primary">Neue Buchung</button>
-        </form>
+        @{
+            if (User.IsInRole("Admin") || User.IsInRole("User"))
+            {
+                <form asp-action="CreateEditGastInfo">
+                    <button type="submit" class="btn btn-primary">Neue Buchung</button>
+                </form>
+            }
+        }
+
 
     </div>
 
