@@ -86,19 +86,28 @@ namespace MeditationVeranstaltungApp.Controllers
         {
             if (gastInfoModel != null)
             {
-                var gastInfo = new GastInfo
+
+                var gastInfo = new GastInfo();
+                gastInfo.UserId = userManager.GetUserId(HttpContext.User);
+
+                if (gastInfoModel.Id != 0)
                 {
-                    Id = gastInfoModel.Id,
-                    Veranstalltung = gastInfoModel.Veranstalltung,
-                    AnzahlMaenner = gastInfoModel.AnzahlMaenner,
-                    AnzahlWeiblich = gastInfoModel.AnzahlWeiblich,
-                    AnkunftAm = gastInfoModel.AnkunftAm.ToDateTime(gastInfoModel.AnkunftUm),
-                    AnkunftOrt = gastInfoModel.AnkunftOrt,
-                    AbfahrtAm = gastInfoModel.AbfahrtAm.ToDateTime(gastInfoModel.AbfahrtUm),
-                    AbfahrtOrt = gastInfoModel.AbfahrtOrt,
-                    Notiz = gastInfoModel.Notiz,
-                    UserId = userManager.GetUserId(HttpContext.User)
-                };
+                    gastInfo = context.GastInfos.Include(q => q.Kontakt).FirstOrDefault(g => g.Id == gastInfoModel.Id);
+                    if (gastInfo == null)
+                    {
+                        return NotFound();
+                    }
+                }
+
+
+                gastInfo.Veranstalltung = gastInfoModel.Veranstalltung;
+                gastInfo.AnzahlMaenner = gastInfoModel.AnzahlMaenner;
+                gastInfo.AnzahlWeiblich = gastInfoModel.AnzahlWeiblich;
+                gastInfo.AnkunftAm = gastInfoModel.AnkunftAm.ToDateTime(gastInfoModel.AnkunftUm);
+                gastInfo.AnkunftOrt = gastInfoModel.AnkunftOrt;
+                gastInfo. AbfahrtAm = gastInfoModel.AbfahrtAm.ToDateTime(gastInfoModel.AbfahrtUm);
+                gastInfo.AbfahrtOrt = gastInfoModel.AbfahrtOrt;
+                gastInfo.Notiz = gastInfoModel.Notiz;
 
                 var kontakt = context.Kontakts
                     .Where(k => k.Vorname == gastInfoModel.Vorname &&
@@ -129,6 +138,7 @@ namespace MeditationVeranstaltungApp.Controllers
                     };
 
                 }
+
                 if (gastInfoModel.Id == 0)
                 {
                     context.GastInfos.Add(gastInfo);

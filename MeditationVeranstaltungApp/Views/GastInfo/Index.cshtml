@@ -45,11 +45,11 @@
                         }
 
                         <td>
-                            <div class="d-flex" style="gap: 4px;">
-                                <form asp-action="Details" asp-route-id="@gast.Id">
-                                    <button type="submit" class="btn btn-info">Anzeigen</button>
-                                </form>
-                            </div>
+
+                            <form asp-action="Details" method="get" asp-route-id="@gast.Id">
+                                <button type="submit" class="btn btn-info">Anzeigen</button>
+                            </form>
+
                         </td>
                     </tr>
                 }
