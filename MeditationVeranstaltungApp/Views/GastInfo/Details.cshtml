@@ -13,7 +13,6 @@
         <!-- item start -->
 
 
-
         <div class="d-flex p-3 justify-content-between" style="position: relative;border: 1px dotted black; border-radius: 5px;">
             <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Travel Info&nbsp;&nbsp;</h5>
 
@@ -66,7 +65,7 @@
             if (gastInfo.Kontakt != null)
             {
                 <div class="d-flex p-3 justify-content-between" style="position: relative;border: 1px dotted black; border-radius: 5px;">
-                    <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Contact Info&nbsp;&nbsp;</h5>
+                    <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Kontakt Info&nbsp;&nbsp;</h5>
 
                     <div>
                         <div class="d-flex flex-column">
@@ -102,7 +101,7 @@
             if (gastInfo.FahrerKontakt != null)
             {
                 <div class="d-flex p-3 justify-content-between" style="position: relative;border: 1px dotted black; border-radius: 5px;">
-                    <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Contact Info&nbsp;&nbsp;</h5>
+                    <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Fahrer Info&nbsp;&nbsp;</h5>
 
                     <div>
                         <div class="d-flex flex-column">
@@ -134,7 +133,27 @@
 
                 </div>
             }
+
+            if (gastInfo.AbgesagtAm != null)
+            {
+                <div class="d-flex p-3 justify-content-between" style="position: relative;border: 1px dotted black; border-radius: 5px;">
+                    <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Absage Info&nbsp;&nbsp;</h5>
+
+                    <div class="d-flex flex-column">
+                        <span><strong>AbgesagtAm</strong></span>
+                        <span>@gastInfo.AbgesagtAm</span>
+                    </div>
+
+                    <div class="d-flex flex-column flex-grow-1">
+                        <span><strong>Grund</strong></span>
+                        <span>@gastInfo.AbsageGrund<span>
+                    </div>
+
+                </div>
+
+            }
         }
+
 
 
         <!-- item end -->
@@ -146,44 +165,138 @@
                 {
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#absageBestaetigungModal">Absagen</button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="absageBestaetigungModal" tabindex="-1" aria-labelledby="absageBestaetigungModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                     <!-- Modal -->
+                     <div class="modal fade" id="absageBestaetigungModal" tabindex="-1" aria-labelledby="absageBestaetigungModalLabel" aria-hidden="true">
+                         <div class="modal-dialog">
 
-                            <div class="modal-content">
-                                <form asp-action="Absage" class="d-flex flex-column p-3 gap-3">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="absageBestaetigungModalLabel">Absage</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h5>Schade, dass Sie nicht mitmachen wollen!</h5>
-                                    @model AbsageModel
+                             <div class="modal-content">
+                                 <form asp-action="Absage" class="d-flex flex-column p-3 gap-3">
+                                     <div class="modal-header">
+                                         <h5 class="modal-title" id="absageBestaetigungModalLabel">Absage</h5>
+                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                     </div>
+                                     <div class="modal-body">
+                                         <h5>Schade, dass Sie nicht mitmachen wollen!</h5>
+                                     @model AbsageModel
 
-                                        <div class="d-flex flex-fill mt-1" style="gap:20px;">
-                                            <input hidden type="number" min="0" class="form-control" asp-for="Id" value="@gastInfo.Id" id="Id" name="Id">
-                                            <div class="flex-fill">
-                                                <label for="AbsageGrund" class="form-label">Teilen Sie bitte den Grund mit!</label>
-                                                <textarea asp-for="AbsageGrund" rows="4" class="form-control" id="AbsageGrund" name="AbsageGrund"> </textarea>
-                                            </div>
+                                         <div class="d-flex flex-fill mt-1" style="gap:20px;">
+                                             <input hidden type="number" min="0" class="form-control" asp-for="Id" value="@gastInfo.Id" id="Id" name="Id">
+                                             <div class="flex-fill">
+                                                 <label for="AbsageGrund" class="form-label">Teilen Sie bitte den Grund mit!</label>
+                                                 <textarea asp-for="AbsageGrund" rows="4" class="form-control" id="AbsageGrund" name="AbsageGrund"> </textarea>
+                                             </div>
 
 
-                                        </div>
+                                         </div>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-                                        <button type="submit" class="btn btn-danger">Absagen</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                                     </div>
+                                     <div class="modal-footer">
+                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                         <button type="submit" class="btn btn-danger">Absagen</button>
+                                     </div>
+                                 </form>
+                             </div>
+                         </div>
+                     </div>
+
+
+                    <form asp-action="CreateEditGastInfo" asp-route-id="@gastInfo.Id">
+                        <button type="submit" class="btn btn-warning">Editieren</button>
+                    </form>
+
+                    if (User.IsInRole("Admin"))
+                    {
+
+                        <form asp-action="FahrerZuweisen" asp-route-id="@gastInfo.Id">
+                            <button type="submit" class="btn btn-primary">Fahrer Zuweisen</button>
+                        </form>
+
+                    //     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fahrerZuweisen">Fahrer Zuweisen</button>
+                        
+                    //          <!-- Modal -->
+                    //     <div class="modal fade" id="fahrerZuweisen" tabindex="-1" aria-labelledby="fahrerZuweisen" aria-hidden="true">
+                    //     <div class="modal-dialog">
+
+                    //         <div class="modal-content">
+                    //                 <form asp-action="FahrerZuweisen" class="d-flex flex-column p-3 gap-3">
+                    //                 <div class="modal-header">
+                    //                         <h5 class="modal-title" id="absageBestaetigungModalLabel">FahrerZuweisen</h5>
+                    //                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    //                 </div>
+                    //                 <div class="modal-body">
+                    //                 @model FahrerZuweisenModel
+
+                    //                         <div class="d-flex p-3 flex-column" style="position: relative;border: 1px dotted black; border-radius: 5px;">
+                    //                             <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Kontakt Info&nbsp;&nbsp;</h5>
+
+                    //                             <div class="d-flex flex-fill mt-1" style="gap:20px;">
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Anrede" class="form-label">Anrede:</label>
+                    //                                     <select class="form-select" asp-for="Anrede" id="Anrede" name="Anrede">
+                    //                                         <option>Herr</option>
+                    //                                         <option>Frau</option>
+                    //                                         <option>--</option>
+                    //                                     </select>
+                    //                                 </div>
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Vorname" class="form-label">Vorname:</label>
+                    //                                     <input type="text" class="form-control" asp-for="Vorname" id="Vorname" name="Vorname">
+                    //                                 </div>
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Nachname" class="form-label">Nachname:</label>
+                    //                                     <input type="text" class="form-control" asp-for="Nachname" id="Nachname" name="Nachname">
+                    //                                 </div>
+
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Geschlecht" class="form-label">Geschlecht:</label>
+                    //                                     <select class="form-select" asp-for="Geschlecht" id="Geschlecht" name="Geschlecht">
+                    //                                         <option>Male</option>
+                    //                                         <option>Female</option>
+                    //                                         <option>Others</option>
+                    //                                     </select>
+                    //                                 </div>
+
+                    //                             </div>
+                    //                             <div class="d-flex mt-1" style="gap:20px;">
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Email" class="form-label">Email:</label>
+                    //                                     <input type="Email" class="form-control" asp-for="Email" id="Email" name="Email">
+                    //                                 </div>
+
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Telefon" class="form-label">Telefon:</label>
+                    //                                     <input type="tel" class="form-control" asp-for="Telefon" id="Telefon" name="Telefon">
+                    //                                 </div>
+                    //                             </div>
+
+                    //                             <div class="d-flex mt-1" style="gap:20px;">
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Stadt" class="form-label">Stadt:</label>
+                    //                                     <input type="text" class="form-control" asp-for="Stadt" id="Stadt" name="Stadt">
+                    //                                 </div>
+
+                    //                                 <div class="flex-fill">
+                    //                                     <label for="Land" class="form-label">Land:</label>
+                    //                                     <input type="text" class="form-control" asp-for="Land" id="Land" name="Land">
+                    //                                 </div>
+
+                    //                             </div>
+                    //                         </div>
+
+
+                    //                     </div>
+                    //                 <div class="modal-footer">
+                    //                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    //                     <button type="submit" class="btn btn-danger">Absagen</button>
+                    //                 </div>
+                    //             </form>
+                    //         </div>
+                    //     </div>
+                    // </div>
+
+                    }
                 }
             }
-            <form asp-action="CreateEditGastInfo" asp-route-id="@gastInfo.Id">
-                <button type="submit" class="btn btn-warning">Editieren</button>
-            </form>
         </div>
 
 

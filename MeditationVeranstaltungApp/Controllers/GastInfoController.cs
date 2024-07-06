@@ -158,6 +158,55 @@ namespace MeditationVeranstaltungApp.Controllers
             context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult FahrerZuweisen(int id)
+        {
+            var fahrerZuweisenModel = new FahrerZuweisenModel
+            {
+                gastInfoId = id
+            };
+            return View("FahrerZuweisen", fahrerZuweisenModel);
+        }
+
+        public IActionResult FahrerZuweisenSubmit(FahrerZuweisenModel fahrerZuweisenModel)
+        {
+            var gastInfoAusDB = context.GastInfos.FirstOrDefault(g => g.Id == fahrerZuweisenModel.gastInfoId);
+
+            var fahrerKontakt = context.Kontakts
+                .Where(k => k.Vorname == fahrerZuweisenModel.Vorname &&
+                k.Nachname == fahrerZuweisenModel.Nachname &&
+                k.Telefon == fahrerZuweisenModel.Telefon &&
+                k.Stadt == fahrerZuweisenModel.Stadt &&
+                k.Land == fahrerZuweisenModel.Land
+                ).FirstOrDefault();
+
+            if (fahrerKontakt != null)
+            {
+                gastInfoAusDB.FahrerKontaktId = fahrerKontakt.Id;
+                gastInfoAusDB.FahrerKontakt = fahrerKontakt;
+            }
+            else
+            {
+                gastInfoAusDB.FahrerKontakt = new Kontakt
+                {
+                    Anrede = fahrerZuweisenModel.Anrede,
+                    Vorname = fahrerZuweisenModel.Vorname,
+                    Nachname = fahrerZuweisenModel.Nachname,
+                    Geschlecht = fahrerZuweisenModel.Geschlecht,
+                    Email = fahrerZuweisenModel.Email,
+                    Telefon = fahrerZuweisenModel.Telefon,
+                    Stadt = fahrerZuweisenModel.Stadt,
+                    Land = fahrerZuweisenModel.Land,
+                };
+
+            }
+
+
+            context.Entry(gastInfoAusDB).State = EntityState.Modified;
+            context.SaveChanges();
+            return RedirectToAction("Details", gastInfoAusDB);
+        }
+
         public IActionResult Details(int id)
         {
             if (id == 0)

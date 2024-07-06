@@ -30,7 +30,6 @@ namespace MeditationVeranstaltungApp.Models
         public string Telefon { get; set; }
         public string Stadt { get; set; }
         public string Land { get; set; }
-        public int? KontaktId { get; set; }
 
     }
 }
