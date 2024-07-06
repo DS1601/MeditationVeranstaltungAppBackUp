@@ -7,140 +7,142 @@
 @{
     List<string> orte = new List<string> { "Airport-HH", "Altona-HH", "HBF-HH", "Dammtor-HH", "ZOB-HH" };
 }
-<form asp-action="CreateEditGastInfoSubmit" method="post" class="d-flex flex-column p-3 gap-3">
-    <div class="d-flex p-3 flex-column" style="position: relative;border: 1px dotted black; border-radius: 5px;">
-        <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Gast Info&nbsp;&nbsp;</h5>
+<div class="container pt-3 pb-3">
+    <form asp-action="CreateEditGastInfoSubmit" method="post" class="d-flex flex-column p-3 gap-3">
+        <div class="d-flex p-3 flex-column" style="position: relative;border: 1px dotted black; border-radius: 5px;">
+            <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Gast Info&nbsp;&nbsp;</h5>
 
-        <div class="d-flex flex-fill mt-1" style="gap:20px;">
-            <input hidden type="number" min="0" class="form-control" asp-for="Id" id="Id" name="Id">
-            <div class="flex-fill">
-                <label for="AnzahlMaenner" class="form-label">Anzahl Männer:</label>
-                <input type="number" min="0" class="form-control" asp-for="AnzahlMaenner" id="AnzahlMaenner" name="AnzahlMaenner">
+            <div class="d-flex flex-fill mt-1" style="gap:20px;">
+                <input hidden type="number" min="0" class="form-control" asp-for="Id" id="Id" name="Id">
+                <div class="flex-fill">
+                    <label for="AnzahlMaenner" class="form-label">Anzahl Männer:</label>
+                    <input type="number" min="0" class="form-control" asp-for="AnzahlMaenner" id="AnzahlMaenner" name="AnzahlMaenner">
+                </div>
+
+                <div class="flex-fill">
+                    <label for="AnzahlWeiblich" class="form-label">Anzahl Frauen:</label>
+                    <input type="number" min="0" class="form-control" asp-for="AnzahlWeiblich" id="AnzahlWeiblich" name="AnzahlWeiblich">
+                </div>
+
             </div>
+            <div class="d-flex mt-1" style="gap:20px;">
 
-            <div class="flex-fill">
-                <label for="AnzahlWeiblich" class="form-label">Anzahl Frauen:</label>
-                <input type="number" min="0" class="form-control" asp-for="AnzahlWeiblich" id="AnzahlWeiblich" name="AnzahlWeiblich">
-            </div>
+                <div class="flex-fill">
+                    <label for="AnkunftAm" class="form-label">AnkunftAm:</label>
+                    <input type="date" class="form-control" asp-for="AnkunftAm" id="AnkunftAm" name="AnkunftAm">
+                </div>
 
-        </div>
-        <div class="d-flex mt-1" style="gap:20px;">
-
-            <div class="flex-fill">
-                <label for="AnkunftAm" class="form-label">AnkunftAm:</label>
-                <input type="date" class="form-control" asp-for="AnkunftAm" id="AnkunftAm" name="AnkunftAm">
-            </div>
-
-            <div class="flex-fill">
-                <label for="AnkunftUm" class="form-label">AnkunftUm:</label>
-                <input type="time" class="form-control" asp-for="AnkunftUm" id="AnkunftUm" name="AnkunftUm">
-            </div>
-            <div class="flex-fill">
-                <label for="AnkunftOrt" class="form-label">AnkunftOrt:</label>
-                <select class="form-select" asp-for="AnkunftOrt" id="AnkunftOrt" name="AnkunftOrt">
-                    @{
-                        foreach (string ort in orte)
-                        {
-                            <option>@ort</option>
+                <div class="flex-fill">
+                    <label for="AnkunftUm" class="form-label">AnkunftUm:</label>
+                    <input type="time" class="form-control" asp-for="AnkunftUm" id="AnkunftUm" name="AnkunftUm">
+                </div>
+                <div class="flex-fill">
+                    <label for="AnkunftOrt" class="form-label">AnkunftOrt:</label>
+                    <select class="form-select" asp-for="AnkunftOrt" id="AnkunftOrt" name="AnkunftOrt">
+                        @{
+                            foreach (string ort in orte)
+                            {
+                                <option>@ort</option>
+                            }
                         }
-                    }
-                </select>
-            </div>
-        </div>
-
-
-        <div class="d-flex mt-1" style="gap:20px;">
-
-            <div class="flex-fill">
-                <label for="AbfahrtAm" class="form-label">AbfahrtAm:</label>
-                <input type="date" class="form-control" asp-for="AbfahrtAm" id="AbfahrtAm" name="AbfahrtAm">
+                    </select>
+                </div>
             </div>
 
-            <div class="flex-fill">
-                <label for="AbfahrtUm" class="form-label">AbfahrtUm</label>
-                <input type="time" class="form-control" asp-for="AbfahrtUm" id="AbfahrtUm" name="AbfahrtUm">
-            </div>
 
-            <div class="flex-fill">
-                <label for="AbfahrtOrt" class="form-label">AbfahrtOrt:</label>
-                <select class="form-select" asp-for="AbfahrtOrt" id="AbfahrtOrt" name="AbfahrtOrt">
-                    @{
-                        foreach (string ort in orte)
-                        {
-                            <option>@ort</option>
+            <div class="d-flex mt-1" style="gap:20px;">
+
+                <div class="flex-fill">
+                    <label for="AbfahrtAm" class="form-label">AbfahrtAm:</label>
+                    <input type="date" class="form-control" asp-for="AbfahrtAm" id="AbfahrtAm" name="AbfahrtAm">
+                </div>
+
+                <div class="flex-fill">
+                    <label for="AbfahrtUm" class="form-label">AbfahrtUm</label>
+                    <input type="time" class="form-control" asp-for="AbfahrtUm" id="AbfahrtUm" name="AbfahrtUm">
+                </div>
+
+                <div class="flex-fill">
+                    <label for="AbfahrtOrt" class="form-label">AbfahrtOrt:</label>
+                    <select class="form-select" asp-for="AbfahrtOrt" id="AbfahrtOrt" name="AbfahrtOrt">
+                        @{
+                            foreach (string ort in orte)
+                            {
+                                <option>@ort</option>
+                            }
                         }
-                    }
-                </select>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-flex mt-1" style="gap:20px;">
+                <div class="flex-fill">
+                    <label for="Notiz" class="form-label">Notiz:</label>
+                    <textarea rows="4" class="form-control" asp-for="Notiz" id="Notiz" name="Notiz"> </textarea>
+                </div>
             </div>
         </div>
 
-        <div class="d-flex mt-1" style="gap:20px;">
-            <div class="flex-fill">
-                <label for="Notiz" class="form-label">Notiz:</label>
-                <textarea rows="4" class="form-control" asp-for="Notiz" id="Notiz" name="Notiz"> </textarea>
+        <div class="d-flex p-3 flex-column" style="position: relative;border: 1px dotted black; border-radius: 5px;">
+            <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Kontakt Info&nbsp;&nbsp;</h5>
+
+            <div class="d-flex flex-fill mt-1" style="gap:20px;">
+                <div class="flex-fill">
+                    <label for="Anrede" class="form-label">Anrede:</label>
+                    <select class="form-select" asp-for="Anrede" id="Anrede" name="Anrede">
+                        <option>Herr</option>
+                        <option>Frau</option>
+                        <option>--</option>
+                    </select>
+                </div>
+                <div class="flex-fill">
+                    <label for="Vorname" class="form-label">Vorname:</label>
+                    <input type="text" class="form-control" asp-for="Vorname" id="Vorname" name="Vorname">
+                </div>
+                <div class="flex-fill">
+                    <label for="Nachname" class="form-label">Nachname:</label>
+                    <input type="text" class="form-control" asp-for="Nachname" id="Nachname" name="Nachname">
+                </div>
+
+                <div class="flex-fill">
+                    <label for="Geschlecht" class="form-label">Geschlecht:</label>
+                    <select class="form-select" asp-for="Geschlecht" id="Geschlecht" name="Geschlecht">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="d-flex mt-1" style="gap:20px;">
+                <div class="flex-fill">
+                    <label for="Email" class="form-label">Email:</label>
+                    <input type="Email" class="form-control" asp-for="Email" id="Email" name="Email">
+                </div>
+
+                <div class="flex-fill">
+                    <label for="Telefon" class="form-label">Telefon:</label>
+                    <input type="tel" class="form-control" asp-for="Telefon" id="Telefon" name="Telefon">
+                </div>
+            </div>
+
+            <div class="d-flex mt-1" style="gap:20px;">
+                <div class="flex-fill">
+                    <label for="Stadt" class="form-label">Stadt:</label>
+                    <input type="text" class="form-control" asp-for="Stadt" id="Stadt" name="Stadt">
+                </div>
+
+                <div class="flex-fill">
+                    <label for="Land" class="form-label">Land:</label>
+                    <input type="text" class="form-control" asp-for="Land" id="Land" name="Land">
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <div class="d-flex p-3 flex-column" style="position: relative;border: 1px dotted black; border-radius: 5px;">
-        <h5 style="background-color: white;position: absolute; top: -15px; left: 45%;">&nbsp;&nbsp;Kontakt Info&nbsp;&nbsp;</h5>
-
-        <div class="d-flex flex-fill mt-1" style="gap:20px;">
-            <div class="flex-fill">
-                <label for="Anrede" class="form-label">Anrede:</label>
-                <select class="form-select" asp-for="Anrede" id="Anrede" name="Anrede">
-                    <option>Herr</option>
-                    <option>Frau</option>
-                    <option>--</option>
-                </select>
-            </div>
-            <div class="flex-fill">
-                <label for="Vorname" class="form-label">Vorname:</label>
-                <input type="text" class="form-control" asp-for="Vorname" id="Vorname" name="Vorname">
-            </div>
-            <div class="flex-fill">
-                <label for="Nachname" class="form-label">Nachname:</label>
-                <input type="text" class="form-control" asp-for="Nachname" id="Nachname" name="Nachname">
-            </div>
-
-            <div class="flex-fill">
-                <label for="Geschlecht" class="form-label">Geschlecht:</label>
-                <select class="form-select" asp-for="Geschlecht" id="Geschlecht" name="Geschlecht">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Others</option>
-                </select>
-            </div>
-
+        <div class="d-flex p-3 justify-content-between">
+            <button type="button" class="btn btn-primary" onclick="history.back()">Zurück</button>
+            <button type="submit" class="btn btn-primary">Speichern</button>
         </div>
-        <div class="d-flex mt-1" style="gap:20px;">
-            <div class="flex-fill">
-                <label for="Email" class="form-label">Email:</label>
-                <input type="Email" class="form-control" asp-for="Email" id="Email" name="Email">
-            </div>
-
-            <div class="flex-fill">
-                <label for="Telefon" class="form-label">Telefon:</label>
-                <input type="tel" class="form-control" asp-for="Telefon" id="Telefon" name="Telefon">
-            </div>
-        </div>
-
-        <div class="d-flex mt-1" style="gap:20px;">
-            <div class="flex-fill">
-                <label for="Stadt" class="form-label">Stadt:</label>
-                <input type="text" class="form-control" asp-for="Stadt" id="Stadt" name="Stadt">
-            </div>
-
-            <div class="flex-fill">
-                <label for="Land" class="form-label">Land:</label>
-                <input type="text" class="form-control" asp-for="Land" id="Land" name="Land">
-            </div>
-
-        </div>
-    </div>
-
-    <div class="d-flex p-3 justify-content-between">
-        <button type="button" class="btn btn-primary" onclick="history.back()">Zurück</button>
-        <button type="submit" class="btn btn-primary">Speichern</button>
-    </div>
-</form>
+    </form>
+</div>

@@ -2,7 +2,127 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="max-height: 75vh;min-height: 75vh; overflow: hidden;">
+            <img src="images/image1.jpg" alt="Los Angeles" class="d-block" style="width:100%">
+            <div class="carousel-caption">
+                <h3>Los Angeles</h3>
+                <p>We had such a great time in LA!</p>
+            </div>
+        </div>
+        <div class="carousel-item" style="max-height: 75vh;min-height: 75vh; overflow: hidden;">
+            <img src="images/image2.jpg" alt="Chicago" class="d-block" style="width:100%">
+            <div class="carousel-caption">
+                <h3>Chicago</h3>
+                <p>Thank you, Chicago!</p>
+            </div>
+        </div>
+        <div class="carousel-item" style="max-height: 75vh;min-height: 75vh; overflow: hidden;">
+            <img src="images/image3.jpg" alt="New York" class="d-block" style="width:100%">
+            <div class="carousel-caption">
+                <h3>New York</h3>
+                <p>We love the Big Apple!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<div class="container bg-light">
+
+    <!-- Über uns -->
+
+    <div class="p-3 bg-light">
+        <div class="text-center">
+            <h2>Über uns</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga iusto voluptatum dicta in quod voluptatibus officia delectus nam sit numquam ut consequatur asperiores dolorem saepe tempore corrupti, consequuntur maiores distinctio!
+                Voluptatibus, nihil id. Repellat ducimus deleniti placeat at iusto reprehenderit expedita! Debitis nemo, quae earum amet blanditiis a, aperiam beatae vel veniam magnam magni quasi? Tempore recusandae velit accusamus. Odio.
+                Natus cum ad deleniti consequuntur neque. Odit a aperiam vero quidem aliquam incidunt, cumque praesentium laudantium voluptas ad asperiores nam doloremque reprehenderit et, esse animi repellat facere accusantium numquam dignissimos.
+                Voluptatem labore perferendis dolorem, qui ex quasi rem necessitatibus iusto quos autem? Aliquid illo officia neque excepturi, voluptatum delectus debitis reiciendis numquam beatae aliquam obcaecati totam quis labore doloribus illum.
+                Amet qui vitae facere. Ducimus deserunt nihil corporis iure nulla, rem enim atque? Illum perferendis blanditiis quas earum debitis animi voluptate deleniti ex, dolores aut. Vel ullam hic quidem dolores?
+                Quibusdam voluptate facilis quam provident. Asperiores quas dolor saepe veritatis corrupti, voluptatum praesentium facilis cupiditate molestias dignissimos similique odio eius ducimus nobis, doloremque eos illum aspernatur voluptas. Enim, dolore quod.
+                Sint dolorem maiores officia, non quae accusantium id dolorum beatae ex? Minima hic et dolores quisquam, eligendi similique voluptatibus odio porro odit, exercitationem ducimus quod incidunt ad provident dolor rem?
+                Veniam totam provident ipsam! Quis odit iste sit perferendis nihil quisquam ratione totam tenetur facilis eaque commodi, veniam voluptatem qui illo, accusantium ex nesciunt officiis esse quidem eius rerum. Ullam.
+                Doloribus modi quae repudiandae, repellat perspiciatis et deleniti quia quas at tenetur omnis pariatur libero sequi voluptatum maxime odit incidunt possimus doloremque dicta nemo neque ipsa voluptate cum quibusdam.
+            </p>
+        </div>
+    </div>
+
+    <div class="d-flex p-3 bg-light text-white" style="height: 500px;overflow: hidden;">
+        <div class="bg-info flex-fill">
+            <img src="images/image3.jpg" alt="New York" class="d-block" style="width:auto; height: 100%;margin: auto;">
+        </div>
+        <div class="bg-light p-3 text-center flex-fill text-body">
+            <h2>Naam Japo</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+        </div>
+    </div>
+
+    <div class="d-flex flex-row-reverse p-3 bg-light text-white" style="height: 500px;overflow: hidden;">
+        <div class="bg-info flex-fill">
+            <img src="images/image3.jpg" alt="New York" class="d-block" style="width:auto; height: 100%;margin: auto;">
+        </div>
+        <div class="bg-light p-3 text-center flex-fill text-body">
+            <h2>Wand Chhako</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+        </div>
+    </div>
+
+
+    <div class="d-flex p-3 bg-light text-white" style="height: 500px;overflow: hidden;">
+        <div class="bg-info flex-fill">
+            <img src="images/image3.jpg" alt="New York" class="d-block" style="width:auto; height: 100%;margin: auto;">
+        </div>
+        <div class="bg-light p-3 text-center flex-fill text-body">
+            <h2>Kirat karo</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+        </div>
+    </div>
+
+
+    <div class="d-flex p-3 ">
+        <div class="p-3 text-center flex-fill">
+            <h2>Maditation Camp 2024</h2>
+            <h4>06.08.2024 - 12.08.2024</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae repellendus ratione at perferendis earum sint quidem mollitia laboriosam laudantium, accusantium facere, quos molestiae vel recusandae et quam dolores incidunt!</p>
+            <div>
+                <h4>Veneu</h4>
+                Gurdwara Singh Saha <br>
+                Grandweg 97, 22767<br>
+                Hamburg, Germany
+            </div>
+            <br>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+                <button type="button" class="btn btn-primary">Register</button>
+            </a>
+            </a>
+        </div>
+    </div>
+
+    <!-- container end -->
 </div>
