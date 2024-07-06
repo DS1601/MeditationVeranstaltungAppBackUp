@@ -1,4 +1,8 @@
-﻿@{
+﻿@using MeditationVeranstaltungApp.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -117,9 +121,19 @@
                 Hamburg, Germany
             </div>
             <br>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
-                <button type="button" class="btn btn-primary">Register</button>
-            </a>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="GastInfo" asp-action="Index">
+                    <button type="button" class="btn btn-primary">Jetzt anmelden</button>
+                </a>
+            }
+            else
+            {
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+                    <button type="button" class="btn btn-primary">Jetzt anmelden</button>
+                </a>
+            }
             </a>
         </div>
     </div>
