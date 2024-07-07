@@ -26,7 +26,6 @@ namespace MeditationVeranstaltungApp.Controllers
             var query = context.GastInfos.Include(g => g.Kontakt).Include(g => g.FahrerKontakt);
             if (User.IsInRole("Admin"))
             {
-                var userId = userManager.GetUserId(HttpContext.User);
                 var gastInfos = query.ToList();
                 ViewBag.GastInfos = gastInfos;
             }
@@ -105,7 +104,7 @@ namespace MeditationVeranstaltungApp.Controllers
                 gastInfo.AnzahlWeiblich = gastInfoModel.AnzahlWeiblich;
                 gastInfo.AnkunftAm = gastInfoModel.AnkunftAm.ToDateTime(gastInfoModel.AnkunftUm);
                 gastInfo.AnkunftOrt = gastInfoModel.AnkunftOrt;
-                gastInfo. AbfahrtAm = gastInfoModel.AbfahrtAm.ToDateTime(gastInfoModel.AbfahrtUm);
+                gastInfo.AbfahrtAm = gastInfoModel.AbfahrtAm.ToDateTime(gastInfoModel.AbfahrtUm);
                 gastInfo.AbfahrtOrt = gastInfoModel.AbfahrtOrt;
                 gastInfo.Notiz = gastInfoModel.Notiz;
 
@@ -163,7 +162,9 @@ namespace MeditationVeranstaltungApp.Controllers
         {
             var gastInfo = context.GastInfos.FirstOrDefault(g => g.Id == absageModel.Id);
             gastInfo.AbgesagtAm = DateTime.Now;
-            gastInfo.AbsageGrund = absageModel.AbsageGrund; context.GastInfos.Update(gastInfo);
+            gastInfo.AbsageGrund = absageModel.AbsageGrund;
+
+            context.GastInfos.Update(gastInfo);
             context.Entry(gastInfo).State = EntityState.Modified;
             context.SaveChanges();
             return RedirectToAction("Index");
